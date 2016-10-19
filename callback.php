@@ -48,20 +48,21 @@
 		// Result is a JSON object
 
 		
-		$tokens = json_decode($result);
+		$tokens = (array)json_decode($result);
 
 
-/*
-		if (isset($tokens['error'])
+		print_r($tokens);
+
+		if (isset($tokens['error']))
 		{
 			echo "fatal error blue screen window...";
 			exit();
 		}
-		else if (isset($tokens['access_token'])
+		else if (isset($tokens['access_token']))
 		{
 			echo "Access TOKEN => ".$tokens['access_token'];
 		
-			/*
+			
 			// get Data from user with result
 
 			echo "<br>GEtting DATA";
@@ -71,13 +72,14 @@
 			curl_setopt($curl, CURLOPT_URL, $FC_URL."userinfo?schema=openid"); 
 			curl_setopt($curl, CURLOPT_PORT , 443); 
 			curl_setopt($curl, CURLOPT_VERBOSE, 0); 
-			curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+			curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+			curl_setopt($ch, CURLOPT_TIMEOUT, 4);
 			$headers = array(
 			    'Content-type: text/html',
-			    'Authorization: Bearer '.$_SESSION['data']['tokens']['access_token']
+			    'Authorization: Bearer '.$tokens['access_token']
 			);
 			curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
-			//curl_setopt($curl_handle, CURLOPT_CUSTOMREQUEST, 'GET');
+			curl_setopt($curl_handle, CURLOPT_CUSTOMREQUEST, 'GET');
 			$curlData = curl_exec($curl); 
 			if(!curl_errno($curl))
 				$data['curlResult'] = $curlData;
@@ -88,7 +90,7 @@
 			echo "data result => ".$data['curlResult'];
 			
 		}
-*/
+
 
 		$_SESSION['data'] = $data;
 	}
