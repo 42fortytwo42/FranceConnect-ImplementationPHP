@@ -21,9 +21,8 @@
 <br><br><br>
 <?php
 
-	$scope = array("given_name", "family_name", "email");
+	$scope = array("openid", "given_name", "family_name", "email");
 	$scopeHttp = http_build_query($scope);
-
 
 	$action = $FC_URL."authorize?response_type=code&client_id=".$CLIENT_ID."&redirect_uri=".urlencode($FS_URL.$FS_CALLBACK)."&scope=SCOPES&state=STATE&nonce=NONCE";
 ?>
