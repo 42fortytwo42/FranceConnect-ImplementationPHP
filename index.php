@@ -1,7 +1,8 @@
 <?php
+	session_start();
 	// Parameters
 	include 'init.php';
-	$status = "disconnected";
+	$_SESSION['status'] = "disconnected";
 	/*** Loading OpenID ***/
 	include 'Auth/OpenID.php';
 	if (isset($_GET['callback']))
@@ -19,9 +20,9 @@
 ?>
 <br><br><br>
 <?php
-	$action = $FC_URL."authorize?response_type=code&client_id=".$CLIENT_ID."&redirect_uri=".urlencode($FS_URL.$FS_CALLBACK)."&scope=<SCOPES>&state=<STATE>&nonce=<NONCE>";
+	$action = $FC_URL."authorize?response_type=code&client_id=".$CLIENT_ID."&redirect_uri=".urlencode($FS_URL.$FS_CALLBACK)."&scope=SCOPES&state=STATE&nonce=NONCE";
 ?>
-<form method="GET" action="<?php echo $action; ?>" style="text-align:center;">
+<form method="get" action="<?php echo $action; ?>" style="text-align:center;">
 
 <input type="submit" type="image" value="" style="margin:0 auto;width:300px;height:100px;background:url('bouton.png'); background-size: 100% 100%;" />
 <br>
@@ -35,25 +36,33 @@ FranceConnect ?</a>
 Lien Method GET : <?php echo $action; ?>
 <br><br><br>
 <?php
-	echo "<br><br>Status FC : ".$status."<br><br><br>"; 
-	echo "Data : "."<br>";
-	echo "Firstname : "."<br>";
-	echo "LastName : "."<br>";
 
-	echo "<br><br><br>Credits : Thomas LE MIGNAN - BioDeploy.com";
 
-	if ($status == "connected")
+	if ($_SESSION['status'] == "connected")
 	{
 		echo "Connected";
+		$disconnection_link = $FC_URL."logout?id_token_hint=".$_SESSION['data']['tokens']['id_token']."&state=STATE&post_logout_redirect_uri=".urlencode($FC_URL);
 		?>
 
-		<script src="http://fcp.integ01.dev-franceconnect.fr/js/franceconnect.js"></script>
+		Your very name is : FirstName, Lastname
 
-		<div id="fconnect-profile" data-fc-logout-url="/lien-deconnexion">
-		 <a href="#">Disconnection</a>
+		
+
+		<div id="fconnect-profile" data-fc-logout-url="<?php echo $disconnection_link; ?>">
+		 <a href="#">Disconnection (place here the name of the user)</a>
 		</div>
+
+
+		<script src="http://fcp.integ01.dev-franceconnect.fr/js/franceconnect.js"></script>
 
 		<?php
 	}
 	else
 		echo "<br><br>Disconnected from France Connect";
+
+
+	echo "<br><br>Status user connectivity to France Connect : ".$_SESSION['status']."<br><br><br>"; 
+	echo "<br><br><br>Credits : Thomas LE MIGNAN - BioDeploy.com";
+
+	// to see the details
+	print_r($_SESSION['data']);
