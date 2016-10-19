@@ -20,6 +20,11 @@
 ?>
 <br><br><br>
 <?php
+
+	$scope = array("given_name", "family_name", "email");
+	$scopeHttp = http_build_query($scope);
+
+
 	$action = $FC_URL."authorize?response_type=code&client_id=".$CLIENT_ID."&redirect_uri=".urlencode($FS_URL.$FS_CALLBACK)."&scope=SCOPES&state=STATE&nonce=NONCE";
 ?>
 <form method="get" action="<?php echo $action; ?>" style="text-align:center;">
@@ -37,7 +42,6 @@ Lien Method GET : <?php echo $action; ?>
 <br><br><br>
 <?php
 
-
 	if ($_SESSION['status'] == "connected")
 	{
 		echo "Connected";
@@ -45,13 +49,11 @@ Lien Method GET : <?php echo $action; ?>
 		?>
 
 		Your very name is : FirstName, Lastname
-
+		<?php echo $_SESSION['data']['curlResult']; ?>
 		
-
 		<div id="fconnect-profile" data-fc-logout-url="<?php echo $disconnection_link; ?>">
 		 <a href="#">Disconnection (place here the name of the user)</a>
 		</div>
-
 
 		<script src="http://fcp.integ01.dev-franceconnect.fr/js/franceconnect.js"></script>
 
@@ -65,4 +67,5 @@ Lien Method GET : <?php echo $action; ?>
 	echo "<br><br><br>Credits : Thomas LE MIGNAN - BioDeploy.com";
 
 	// to see the details
-	print_r($_SESSION['data']);
+	print_r($_SESSION);
+?>
