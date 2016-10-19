@@ -27,14 +27,15 @@
 
 	$action = $FC_URL."authorize?response_type=code&client_id=".$CLIENT_ID."&redirect_uri=".urlencode($FS_URL.$FS_CALLBACK)."&scope=SCOPES&state=STATE&nonce=NONCE";
 ?>
-<form method="get" action="<?php echo $action; ?>" style="text-align:center;">
+<div style="text-align:center;">
 
-<input type="submit" type="image" value="" style="margin:0 auto;width:300px;height:100px;background:url('bouton.png'); background-size: 100% 100%;" />
+<a href="<?php echo $action; ?>" style="display: block;margin:0 auto;width:300px;height:100px;background:url('bouton.png'); background-size: 100% 100%;"></a>
 <br>
 
 <a href="https://fcp.integ01.dev-franceconnect.fr/apropos">Qu’est-ce que
 FranceConnect ?</a>
-</form>
+
+</div>
 
 
 <br><br><br>
@@ -64,7 +65,7 @@ Lien Method GET : <?php echo $action; ?>
 
 
 	echo "<br><br>Status user connectivity to France Connect : ".$_SESSION['status']."<br><br><br>"; 
-	echo "<br><br><br>Credits : Thomas LE MIGNAN - BioDeploy.com";
+	echo "<br><br><br>Credits : Thomas LE MIGNAN - offered to you by BioDeploy.com<br><br><br>";
 
 	// to see the details
 	print_r($_SESSION);
