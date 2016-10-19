@@ -88,6 +88,26 @@
 			curl_close($curl);
 			
 			echo "data result => ".$data['curlResult'];
+
+			$data['resultFull'] = (array)json_decode($data['curlResult']);
+
+			$_SESSION['status'] = "connected";
+			echo "status : ".$_SESSION['status'];
+
+			if (isset($data['resultFull']['given_name']) && isset($data['resultFull']['family_name']) && isset($data['resultFull']['email']))
+			{
+				$_SESSION['firstname'] = $data['resultFull']['given_name'];
+				$_SESSION['lastname'] = $data['resultFull']['family_name'];
+				$_SESSION['email'] = $data['resultFull']['email'];
+
+				echo "FirstName : ".$_SESSION['firstname'];
+				echo "LastName : ".$_SESSION['lastname'];
+				echo "Email : ".$_SESSION['email'];
+			}
+			else
+				print_r($data['resultFull']);
+
+
 			
 		}
 

@@ -2,7 +2,8 @@
 	session_start();
 	// Parameters
 	include 'init.php';
-	$_SESSION['status'] = "disconnected";
+	if (!isset($_SESSION['status']))
+		$_SESSION['status'] = "disconnected";
 	/*** Loading OpenID ***/
 	include 'Auth/OpenID.php';
 	if (isset($_GET['callback']))
@@ -42,14 +43,18 @@ Lien Method GET : <?php echo $action; ?>
 <br><br><br>
 <?php
 
+echo $_SESSION['status'];
+
+
 	if ($_SESSION['status'] == "connected")
 	{
 		echo "Connected";
 		$disconnection_link = $FC_URL."logout?id_token_hint=".$_SESSION['data']['tokens']['id_token']."&state=STATE&post_logout_redirect_uri=".urlencode($FC_URL);
 		?>
 
-		Your very name is : FirstName, Lastname
-		<?php echo $_SESSION['data']['curlResult']; ?>
+			<?php echo "FirstName : ".$_SESSION['firstname']; ?>
+			<?php echo "LastName : ".$_SESSION['lastname']; ?>
+			<?php echo "Email : ".$_SESSION['email']; ?>
 		
 		<div id="fconnect-profile" data-fc-logout-url="<?php echo $disconnection_link; ?>">
 		 <a href="#">Disconnection (place here the name of the user)</a>
