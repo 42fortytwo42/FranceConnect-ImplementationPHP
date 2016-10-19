@@ -17,15 +17,17 @@
 ?>
 <br><br><br>
 <?php
-$action = "https://fcp.dev.dev-franceconnect.fr/api/v1/authorize?response_type=code&client_id=<?php echo $CLIENT_ID; ?>&redirect_uri=https%3A%2F%2Fbiodeploy.com%2api%2index.php?callback";
+$action = "https://fcp.dev.dev-franceconnect.fr/api/v1/authorize?response_type=code&client_id=".$CLIENT_ID."&redirect_uri=https%3A%2F%2Fbiodeploy.com%2api%2index.php?callback";
 ?>
-<form method="GET" action="<?php echo $action; ?>">
+<form method="GET" action="<?php echo $action; ?>" style="text-align:center;">
 
-<input type="submit" src="bouton.png" type="image" style="width:150px;height:100px;" />
-</form>
+<input type="submit" type="image" value="" style="margin:0 auto;width:300px;height:100px;background:url('bouton.png'); background-size: 100% 100%;" />
 <br>
+
 <a href="https://fcp.integ01.dev-franceconnect.fr/apropos">Qu’est-ce que
 FranceConnect ?</a>
+</form>
+
 
 <br><br><br>
 Lien Method GET : <?php echo $action; ?>
