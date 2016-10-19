@@ -5,7 +5,7 @@
 	if (!isset($_SESSION['status']))
 		$_SESSION['status'] = "disconnected";
 	/*** Loading OpenID ***/
-	include 'Auth/OpenID.php';
+	//include 'Auth/OpenID.php';
 	if (isset($_GET['callback']))
 	{
 		//echo "callback";
