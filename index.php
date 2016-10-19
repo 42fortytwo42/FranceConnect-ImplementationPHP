@@ -1,7 +1,6 @@
-<?php 
-	// FC ID
-	$CLIENT_ID = "634481cb288709102a6d938ee887d7ca51b064d4fa051cc7f18505e827a1eb6a";
-	$CLIENT_SECRET = "cfa06852cb0d7503aef5786c24737e1c263e5b4097fd56c3cdaebd77ab331d03";
+<?php
+	// Parameters
+	include 'init.php';
 	$status = "disconnected";
 	/*** Loading OpenID ***/
 	include 'Auth/OpenID.php';
@@ -14,10 +13,13 @@
 	echo "<h1>API France Connect - DEV </h1>";
 	echo "<br>Key FC => ".$CLIENT_ID."<br>";
 	echo "<br>Secret FC => ".$CLIENT_SECRET."<br>";
+	echo "<h2>Parameters</h2>";
+	echo "<br>FS_URL => ".$FS_URL;
+	echo "<br>FS_CALLBACK => ".$FS_CALLBACK;
 ?>
 <br><br><br>
 <?php
-$action = "https://fcp.dev.dev-franceconnect.fr/api/v1/authorize?response_type=code&client_id=".$CLIENT_ID."&redirect_uri=https%3A%2F%2Fbiodeploy.com%2api%2index.php?callback";
+	$action = $FC_URL."authorize?response_type=code&client_id=".$CLIENT_ID."&redirect_uri=".urlencode($FS_URL.$FS_CALLBACK)."&scope=<SCOPES>&state=<STATE>&nonce=<NONCE>";
 ?>
 <form method="GET" action="<?php echo $action; ?>" style="text-align:center;">
 
