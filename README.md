@@ -1,6 +1,6 @@
 # FranceConnect-ImplementationPHP
 Implementation PHP France Connect
-
+(test it here : http://biodeploy.com/api/ )
 
 OCTOber 19 / 2016 In Octo Paris HQ Event.
 
